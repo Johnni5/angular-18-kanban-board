@@ -1,0 +1,78 @@
+sass scss
+sass style.scss style.css
+sass - without {} -> attention to indentation
+
+ng serve
+ng serve --open
+
+ng generate -> mkdri components + structure
+= ng g c <USER> -> produces folder/component USER
+  ng g c tasks --skip-tests -> without .spec.ts
+
+// TYPE ARRAY
+thisArray: (number | string)[] = [1,'2'] // 1 arr of... 
+
+NEW COMPs:
+import check
+fill in ARRAY, @COMPONENT
+
+// use of data-binding with signals - ok
+<div>
+  <button>
+    // string interpolation // [] -> data-binding
+    <img [src]="'assets/users/'+ selectedUser.avatar" [alt]="selectedUser.name">
+    // property binding
+    <span>{{ selectedUser.name }} </span>
+  </button>
+</div>
+
+
+SIGNAL coming 16, kinda stable 17
+call as f() -> reads the resp. value - changes state if/as needed
+sets up a subscription - if that very variables is changed/gets a new value, ONLY then - re-init
+
+instead of
+zone.js
+when there is a change, where? okay, ill check.--- ill change
+
+
+@Input
+marks <COMP> accessible from outside i.e.:user
+
+from outside, app to user, doestn matter, whether signal OR zone
+
+$event - like self, to hold/shift varables/emit-'signals'
+
+input - signal - active
+output emitter - passive
+
+with output, no decorators needed - if you like that
+
+UNION-TYPE values
+  @Input() name: string | undefined; // instead of ?
+
+TYPE or INTERFACe - up to your choice ...
+-> type, define 'what you want
+-> Interface - only Objects
+
+//
+    @for (user of users)
+user - free of choice, like i
+users - must be exist
+
+track kinda-like i .. which unique <ID> to track, to differentiate between
+
+  @if (selectedUser) 
+    <app-tasks [name]="selectedUser.name"/>
+    // no ? or needed, due to if
+
+
+@for + @if - ANG_17 -> template feature
+PRE:
+@for (user of users; track user.id) 
+      <li *ngFor="let user of users"> //structural-directive
+      @ngIf no let, but ! needed ath the 'end'
+import NgFor - ang/common + adding to imports-[]
+else - see pic -> template plus hook
+
+
