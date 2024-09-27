@@ -18,6 +18,7 @@ export class NewTaskComponent {
   enteredTitle = '';
   enteredSummary = '';
   enteredDueDate = '';
+  // enteredTitle = signal(''); // no template changes needed
 
   onCancelEvent() {
     this.cancel.emit();

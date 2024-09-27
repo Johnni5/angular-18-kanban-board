@@ -15,7 +15,7 @@ export class TasksComponent {
   @Input({required: true}) userId!: string;
   @Input({required: true}) name!: string;
 
-  isAddingTask = false; // not a must to declare typ, due to internal ogik, its declared as fals -> bool
+  isAddingTask = false; // not a must to declare typ, due to internal logik, its declared as false -> bool
 
 
   // @Input() name: string | undefined;
@@ -67,7 +67,7 @@ export class TasksComponent {
   }
 
   onAddTask(taskData: NewTaskData) {
-    this.tasks.push({
+    this.tasks.push({ // unshift -> at the beginning of array
       id: new Date().getTime().toString(),
       userId: this.userId,
       title: taskData.title,
