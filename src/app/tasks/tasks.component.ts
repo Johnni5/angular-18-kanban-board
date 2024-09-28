@@ -1,7 +1,8 @@
-import { Component, Input} from '@angular/core';
+import { Component, inject, Input} from '@angular/core';
 import { TaskComponent } from "./task/task.component";
 import { NewTaskComponent } from './new-task/new-task.component';
 import { NewTaskData } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -17,63 +18,29 @@ export class TasksComponent {
 
   isAddingTask = false; // not a must to declare typ, due to internal logik, its declared as false -> bool
 
+  private readonly tasksService: TasksService; // lazily approach
+
+  constructor() {
+    this.tasksService = inject(TasksService);
+  }
+
+  // 1 private tasksService = new TasksService(); -> one instance of this service, if needed elsewhere - go make another one : bad
 
   // @Input() name: string | undefined;
   // @Input() name?: string;
   // @Input({ required: true }) name!: string;
 
-  tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Master Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how to apply them.',
-      dueDate: '2025-12-31',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-05-31',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-06-15',
-    },
-  ]
-
   get selectedUserTask() {
-    return this.tasks.filter((task)=>task.userId === this.userId);
-  }
-
-  onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task)=>{
-      task.id !== id
-    });
+    // 1 return this.tasksService.getUserId(this.userId);
+    return this.tasksService.getUserId(this.userId);
   }
 
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelTask() {
+  onCloseTask() {
     this.isAddingTask = false;
   }
-
-  onAddTask(taskData: NewTaskData) {
-    this.tasks.push({ // unshift -> at the beginning of array
-      id: new Date().getTime().toString(),
-      userId: this.userId,
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.dueDate
-    });
-    this.isAddingTask = false;
-  }
+  
 }
